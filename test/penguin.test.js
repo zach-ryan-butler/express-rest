@@ -16,4 +16,15 @@ describe('penguin routes', () => {
                 });
             });
     });
+    it('can get an array of penguins with GET', () => {
+        return request(app)
+            .get('/api/v1/penguins')
+            .then(res => {
+                expect(res.body).toEqual([{
+                    type: 'emperor',
+                    name: 'lucy',
+                    age: 10
+                }]);
+            });
+    });
 });
