@@ -27,4 +27,31 @@ describe('penguin routes', () => {
                 }]);
             });
     });
+    it('can get a penguin by its index', () => {
+        return request(app)
+            .get('/app/v1/penguins/0')
+            .then(res => {
+                expect(res.body).toEqual({
+                    type: 'emperor',
+                    name: 'lucy',
+                    age: 10
+                });
+            });
+    });
+    it('can update a penguin by its index', () => {
+        return request(app)
+            .put('/app/v1/penguins/0')
+            .send({
+                type: 'penguin',
+                name: 'bob',
+                age: 5
+            })
+            .then(res => {
+                expect(res.body).toEqual({
+                    type: 'penguin',
+                    name: 'bob',
+                    age: 5
+                });
+            });
+    });
 });
