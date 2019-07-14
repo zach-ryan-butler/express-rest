@@ -29,7 +29,7 @@ describe('penguin routes', () => {
     });
     it('can get a penguin by its index', () => {
         return request(app)
-            .get('/app/v1/penguins/0')
+            .get('/api/v1/penguins/0')
             .then(res => {
                 expect(res.body).toEqual({
                     type: 'emperor',
@@ -40,13 +40,27 @@ describe('penguin routes', () => {
     });
     it('can update a penguin by its index', () => {
         return request(app)
-            .put('/app/v1/penguins/0')
+            .put('/api/v1/penguins/0')
             .send({
                 type: 'penguin',
                 name: 'bob',
                 age: 5
             })
             .then(res => {
+                expect(res.body).toEqual({
+                    type: 'penguin',
+                    name: 'bob',
+                    age: 5
+                });
+            });
+    });
+    it('can delete a penguin bt its index', () => {
+        return request(app)
+            .delete('/api/v1/penguins/0')
+            .then(res => {
+                // can send back:
+                // the array
+                // the thing that was deleted
                 expect(res.body).toEqual({
                     type: 'penguin',
                     name: 'bob',
